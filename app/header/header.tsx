@@ -15,7 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import CodeIcon from '@mui/icons-material/Code';
 
-const pages = ['Curriculum', 'Proyecyos'];
+const pages = ['Curriculum', 'Proyectos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -54,7 +54,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            Fullstack Developer
+            Portafolio
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,7 +108,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            Dev
+            P
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
