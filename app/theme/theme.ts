@@ -1,29 +1,29 @@
 "use client";
-import { createTheme } from '@mui/material/styles';
-import { green } from '@mui/material/colors';
+import { createTheme } from "@mui/material/styles";
+//import { blueGrey } from "@mui/material/colors";
 
 const game = createTheme({
   palette: {
     primary: {
-      main: green[800],
-      light: green[700],
-      dark: green[900],
-      contrastText: '#fff',
+      main: "#7680A0",
+      light: "#9AA3C0",
+      dark: "#5A617A",
+      contrastText: "#fff",
     },
   },
-  typography:{
+  typography: {
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
+    ].join(","),
   },
 });
 
