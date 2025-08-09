@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -8,10 +10,17 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import Link from "next/link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 const email = "eduardo_valllejo@outlook.es";
 
 export default function Home() {
+  const [value, setValue] = React.useState<number>(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
   return (
     <Box
       component="section"
@@ -60,7 +69,7 @@ export default function Home() {
           </Typography>
         </Stack>
         <Stack
-          direction="row"
+          direction={{ xs: "column", sm: "row" }}
           spacing={2}
           justifyContent="center"
           alignItems="center"
@@ -89,6 +98,45 @@ export default function Home() {
             </Typography>
           </Stack>
         </Stack>
+        <Divider
+          sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
+        />
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{ alignSelf: "flex-start", textAlign: "left" }}
+        >
+          Perfil profesional
+        </Typography>
+        <Typography
+          gutterBottom
+          align="justify"
+          variant="body2"
+          sx={{ alignSelf: "flex-start", textAlign: "left" }}
+        >
+          Ingeniero en Sistemas con 4 años de experiencia desarrollando
+          soluciones web robustas con Laravel, React y Lit Element. Experto en
+          bases de datos SQL, despliegue tanto en Digital Ocean como en
+          servidores Dabian y soporte técnico integral. Certificado por
+          Microsoft en CRM Dynamics 365. Alta capacidad de adaptación, trabajo
+          en equipo y resolución de problemas.
+        </Typography>
+        <Divider
+          sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
+        />
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ alignSelf: "flex-start", textAlign: "left" }}
+        >
+          Experiencia Laboral
+        </Typography>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Pestaña 1" />
+          <Tab label="Pestaña 2" />
+          <Tab label="Pestaña 3" />
+        </Tabs>
       </Paper>
     </Box>
   );
