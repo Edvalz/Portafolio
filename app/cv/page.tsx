@@ -1,43 +1,51 @@
 "use client";
 
 import * as React from "react";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import Link from "next/link";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import HomeWorkIcon from "@mui/icons-material/HomeWork";
-import DateRangeIcon from "@mui/icons-material/DateRange";
-import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import CheckIcon from "@mui/icons-material/Check";
-import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import SchoolIcon from "@mui/icons-material/School";
-import CardMembershipIcon from "@mui/icons-material/CardMembership";
-import WorkspacePremiumSharpIcon from "@mui/icons-material/WorkspacePremiumSharp";
-import BuildSharpIcon from "@mui/icons-material/BuildSharp";
-import BrushSharpIcon from "@mui/icons-material/BrushSharp";
-import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
-import StorageSharpIcon from "@mui/icons-material/StorageSharp";
-import GroupsSharpIcon from "@mui/icons-material/GroupsSharp";
-import Chip from "@mui/material/Chip";
+import { useRef } from "react";
+import ContactItem from "./ContactItem";
+import ExperienceItem from "./ExperienceItem";
+import CertificationItem from "./CertificationsItem";
+import SkillItem from "./SkillItem";
+import SoftItem from "./SoftItem";
+import { useReactToPrint } from "react-to-print";
+import {
+  Typography,
+  Box,
+  Paper,
+  Divider,
+  Stack,
+  Chip,
+  Fab,
+  Tooltip,
+} from "@mui/material";
+import {
+  Email as EmailIcon,
+  PhoneAndroid as PhoneAndroidIcon,
+  LinkedIn as LinkedInIcon,
+  HomeWork as HomeWorkIcon,
+  WorkHistory as WorkHistoryIcon,
+  AccountBox as AccountBoxIcon,
+  School as SchoolIcon,
+  CardMembership as CardMembershipIcon,
+  BuildSharp as BuildSharpIcon,
+  BrushSharp as BrushSharpIcon,
+  SettingsSharp as SettingsSharpIcon,
+  StorageSharp as StorageSharpIcon,
+  GroupsSharp as GroupsSharpIcon,
+  Download as DownloadIcon,
+  Terminal as TerminalIcon,
+} from "@mui/icons-material";
 
 const email = "eduardo_valllejo@outlook.es";
 
-export default function Home() {
+export default function CV() {
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+    documentTitle: "CV_Jose_Eduardo_Vallejo_Cruz",
+  });
+
   return (
     <Box
       component="section"
@@ -49,6 +57,7 @@ export default function Home() {
       }}
     >
       <Paper
+        ref={componentRef}
         elevation={3}
         sx={{
           display: "flex",
@@ -59,8 +68,30 @@ export default function Home() {
           p: 4,
           mt: 4,
           mb: 4,
+          "@media print": {
+            width: "100%",
+            maxWidth: "100%",
+            margin: 0,
+            padding: 2,
+            pageBreakInside: "avoid",
+          },
         }}
       >
+        <Tooltip title="Descargar PDF">
+          <Fab
+            color="secondary"
+            onClick={handlePrint}
+            sx={{
+              alignSelf: "flex-end",
+              mb: 2,
+              "@media print": {
+                display: "none",
+              },
+            }}
+          >
+            <DownloadIcon />
+          </Fab>
+        </Tooltip>
         <Typography variant="h3" component="h1" gutterBottom>
           Jose Eduardo Vallejo Cruz
         </Typography>
@@ -92,28 +123,20 @@ export default function Home() {
           alignItems="center"
           sx={{ mt: 2 }}
         >
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <EmailIcon sx={{ color: "primary.main" }} />
-            <Typography variant="body1">
-              <Link href={`mailto:${email}`}>{email}</Link>
-            </Typography>
-          </Stack>
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <PhoneAndroidIcon sx={{ color: "primary.main" }} />
-            <Typography variant="body1">55-64-34-54-79</Typography>
-          </Stack>
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <LinkedInIcon sx={{ color: "primary.main" }} />
-            <Typography variant="body1">
-              <Link
-                href="https://www.linkedin.com/in/jose-eduardo-vallejo-cruz-7360541b6/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Perfil de LinkedIn
-              </Link>
-            </Typography>
-          </Stack>
+          <ContactItem
+            icon={<EmailIcon color="primary" />}
+            text={email}
+            href={`mailto:${email}`}
+          />
+          <ContactItem
+            icon={<PhoneAndroidIcon color="primary" />}
+            text="55-64-34-54-79"
+          />
+          <ContactItem
+            icon={<LinkedInIcon color="primary" />}
+            text="Perfil de LinkedIn"
+            href="https://www.linkedin.com/in/jose-eduardo-vallejo-cruz-7360541b6/"
+          />
         </Stack>
         <Divider
           sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
@@ -127,6 +150,7 @@ export default function Home() {
           <AccountBoxIcon
             sx={{ mr: 3, verticalAlign: "middle" }}
             fontSize="large"
+            color="secondary"
           />
           Perfil profesional
         </Typography>
@@ -154,188 +178,59 @@ export default function Home() {
           <WorkHistoryIcon
             sx={{ mr: 3, verticalAlign: "middle" }}
             fontSize="large"
+            color="secondary"
           />
           Experiencia Laboral
         </Typography>
-        <Accordion sx={{ width: "100%" }}>
-          <AccordionSummary
-            expandIcon={<ArrowDropDownIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            <Stack
-              direction="row"
-              divider={
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{ my: 2, backgroundColor: "primary.main" }}
-                />
-              }
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="body1">
-                <HomeWorkIcon sx={{ verticalAlign: "middle", mr: 1 }} />
-                Sunrise Computer Services
-              </Typography>
-              <Typography variant="body1">
-                <DateRangeIcon sx={{ verticalAlign: "middle", mr: 1 }} />
-                Septiembre 2024 - Agosto 2025
-              </Typography>
-            </Stack>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Desarrollo de sistemas administrativos con Laravel, Blade y
-                  PostgreSQL.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Despliegue en DigitalOcean y soporte técnico vía tickets.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>Uso de Git y Git Hub.</Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Despliegue en Debian y administración de multiples
-                  aplicaciones.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Implementación de Github Actions para CI y CD.
-                </Typography>
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion sx={{ width: "100%" }}>
-          <AccordionSummary
-            expandIcon={<ArrowDropDownIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            <Stack
-              direction="row"
-              divider={
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{ my: 2, backgroundColor: "primary.main" }}
-                />
-              }
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="body1">
-                <HomeWorkIcon sx={{ verticalAlign: "middle", mr: 1 }} />
-                Indra Sistemas México
-              </Typography>
-              <Typography variant="body1">
-                <DateRangeIcon sx={{ verticalAlign: "middle", mr: 1 }} />
-                Mayo 2023 - Septiembre 2024
-              </Typography>
-            </Stack>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Desarrollo de componentes Web con React, Lit Element y
-                  Polymer.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Desarrollo de PCFs para Dynamics 365 usando React, C#, JS y
-                  Power Automate.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>Capacitación en CRM Dynamics 365.</Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>Uso de Git y Git Hub.</Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>Metodología SCRUM.</Typography>
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion sx={{ width: "100%" }}>
-          <AccordionSummary
-            expandIcon={<ArrowDropDownIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            <Stack
-              direction="row"
-              divider={
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{ my: 2, backgroundColor: "primary.main" }}
-                />
-              }
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="body1">
-                <EmojiTransportationIcon
-                  sx={{ verticalAlign: "middle", mr: 1 }}
-                />
-                Sunrise Computer Services
-              </Typography>
-              <Typography variant="body1">
-                <DateRangeIcon sx={{ verticalAlign: "middle", mr: 1 }} />
-                Febrero 2020 - Mayo 2023
-              </Typography>
-            </Stack>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Desarrollo de un CRM interno con PHP y MySQL.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Mantenimiento de páginas web y soporte técnico en sitio y
-                  remoto.
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <CheckIcon sx={{ mr: 1 }} />
-                <Typography>
-                  Diseño y administración de bases de datos.
-                </Typography>
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
+        <ExperienceItem
+          icon={
+            <HomeWorkIcon
+              color="primary"
+              sx={{ verticalAlign: "middle", mr: 1 }}
+            />
+          }
+          title="Sunrise Computer Services"
+          date_range="Febrero 2020 - Mayo 2023"
+          tasks={[
+            "Desarrollo de un CRM interno con PHP y MySQL.",
+            "Mantenimiento de páginas web y soporte técnico en sitio y remoto.",
+            "Diseño y administración de bases de datos.",
+          ]}
+        />
+        <ExperienceItem
+          icon={
+            <HomeWorkIcon
+              color="primary"
+              sx={{ verticalAlign: "middle", mr: 1 }}
+            />
+          }
+          title="Indra Sistemas México"
+          date_range="Mayo 2023 - Septiembre 2024"
+          tasks={[
+            "Desarrollo de componentes Web con React, Lit Element y Polymer.",
+            "Desarrollo de PCFs para Dynamics 365 usando React, C#, JS y Power Automate.",
+            "Capacitación en CRM Dynamics 365.",
+            "Uso de Git y Git Hub.",
+            "Metodología SCRUM.",
+          ]}
+        />
+        <ExperienceItem
+          icon={
+            <HomeWorkIcon
+              color="primary"
+              sx={{ verticalAlign: "middle", mr: 1 }}
+            />
+          }
+          title="Sunrise Computer Services"
+          date_range="Septiembre 2024 - Agosto 2025"
+          tasks={[
+            "Desarrollo de sistemas administrativos con Laravel, Blade y PostgreSQL.",
+            "Despliegue en DigitalOcean y soporte técnico vía tickets.",
+            "Uso de Git y Git Hub.",
+            "Despliegue en Debian y administración de multiples aplicaciones.",
+            "Implementación de Github Actions para CI y CD.",
+          ]}
+        />
         <Divider
           sx={{ width: "100%", mb: 2, mt: 4, backgroundColor: "primary.main" }}
         />
@@ -348,6 +243,7 @@ export default function Home() {
           <SchoolIcon
             sx={{ mr: 3, verticalAlign: "middle" }}
             fontSize="large"
+            color="secondary"
           />
           Educación
         </Typography>
@@ -380,30 +276,17 @@ export default function Home() {
           <CardMembershipIcon
             sx={{ mr: 3, verticalAlign: "middle" }}
             fontSize="large"
+            color="secondary"
           />
           Certificaciones
         </Typography>
-        <List sx={{ alignSelf: "flex-start", textAlign: "left" }}>
-          <ListItem>
-            <WorkspacePremiumSharpIcon sx={{ mr: 1 }} />
-            <Typography>
-              Microsoft Certified: Dynamics 365 Customer Service Functional
-              Consultant Associate.
-            </Typography>
-          </ListItem>
-          <ListItem>
-            <WorkspacePremiumSharpIcon sx={{ mr: 1 }} />
-            <Typography>
-              Microsoft Certified: Power Platform Fundamentals.
-            </Typography>
-          </ListItem>
-          <ListItem>
-            <WorkspacePremiumSharpIcon sx={{ mr: 1 }} />
-            <Typography>
-              Microsoft Certified: Dynamics 365 Fundamentals (CRM).
-            </Typography>
-          </ListItem>
-        </List>
+        <CertificationItem
+          certifications={[
+            "Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate",
+            "Microsoft Certified: Power Platform Fundamentals",
+            "Microsoft Certified: Dynamics 365 Fundamentals (CRM)",
+          ]}
+        />
         <Divider
           sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
         />
@@ -416,68 +299,34 @@ export default function Home() {
           <BuildSharpIcon
             sx={{ mr: 3, verticalAlign: "middle" }}
             fontSize="large"
+            color="secondary"
           />
           Habilidades Técnias
         </Typography>
-        <List sx={{ alignSelf: "flex-start", textAlign: "left" }}>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar sx={{ bgcolor: "primary.main" }}>
-                <BrushSharpIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Frontend"
-              secondary="HTML5, CSS3, JavaScript (ES6), React, Lit Element, Web Components"
-              slotProps={{
-                primary: {
-                  sx: { fontWeight: "bold" },
-                },
-                secondary: {
-                  sx: { color: "text.primary" },
-                },
-              }}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar sx={{ bgcolor: "primary.main" }}>
-                <SettingsSharpIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Backend"
-              secondary="PHP, Laravel, Blade, Node.js, C#"
-              slotProps={{
-                primary: {
-                  sx: { fontWeight: "bold" },
-                },
-                secondary: {
-                  sx: { color: "text.primary" },
-                },
-              }}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar sx={{ bgcolor: "primary.main" }}>
-                <StorageSharpIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Base de Datos"
-              secondary="MySQL, PostgreSQL, MariaDB"
-              slotProps={{
-                primary: {
-                  sx: { fontWeight: "bold" },
-                },
-                secondary: {
-                  sx: { color: "text.primary" },
-                },
-              }}
-            />
-          </ListItem>
-        </List>
+        <SkillItem
+          skills={[
+            {
+              icon: <BrushSharpIcon />,
+              title: "Frontend",
+              text: "HTML5, CSS3, JavaScript (ES6), React, Lit Element, Web Components",
+            },
+            {
+              icon: <SettingsSharpIcon />,
+              title: "Backend",
+              text: "PHP, Laravel, Blade, Node.js, C#",
+            },
+            {
+              icon: <StorageSharpIcon />,
+              title: "Base de Datos",
+              text: "MySQL, PostgreSQL, MariaDB",
+            },
+            {
+              icon: <TerminalIcon />,
+              title: "Otros",
+              text: "Programación Asíncrona, Consumo de APIs, Algoritmos y Estructuras de Datos, Terminal Linux",
+            },
+          ]}
+        />
         <Divider
           sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
         />
@@ -490,41 +339,21 @@ export default function Home() {
           <GroupsSharpIcon
             sx={{ mr: 3, verticalAlign: "middle" }}
             fontSize="large"
+            color="secondary"
           />
           Otras Habilidades
         </Typography>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={1}
-          justifyContent="center"
-          alignItems="center"
-          sx={{ mt: 2, flexWrap: "wrap", gap: 2 }}
-        >
-          <Chip label="Consumo de APIs" sx={{ bgcolor: "primary.main" }} />
-          <Chip
-            label="Programación Asíncrona"
-            sx={{ bgcolor: "primary.main" }}
-          />
-          <Chip
-            label="Algoritmos y Estructuras de Datos"
-            sx={{ bgcolor: "primary.main" }}
-          />
-          <Chip label="POO" sx={{ bgcolor: "primary.main" }} />
-          <Chip
-            label="Resolución de Problemas"
-            sx={{ bgcolor: "primary.main" }}
-          />
-          <Chip label="Tabajo en Equipo" sx={{ bgcolor: "primary.main" }} />
-          <Chip label="Liderazgo" sx={{ bgcolor: "primary.main" }} />
-        </Stack>
+        <SoftItem
+          skills={[
+            "Responsabilidad",
+            "Proactividad",
+            "Resolución de Problemas",
+            "Trabajo en Equipo",
+            "Liderazgo",
+            "Gestión de Proyectos",
+          ]}
+        />
       </Paper>
     </Box>
   );
 }
-
-/*
- Filtar habilidades tecnicas y blandas, cambiar el orden de las experiencias laborale, 
- Alineacion de los titulos de los acordeones,
- Glosario de Iconos.
- Agregar la opción para descargar en PDF.
-*/
