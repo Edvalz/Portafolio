@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Chip, Stack } from "@mui/material";
-import { WorkspacePremiumSharp as WorkspacePremiumSharpIcon } from "@mui/icons-material";
 
 interface SoftItemProps {
   skills: string[];
