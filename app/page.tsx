@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,8 +7,16 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Box from "@mui/material/Box";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { Slide } from "@mui/material";
 
 export default function Home() {
+  const [show, setShow] = useState<boolean>(false);
+
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
   return (
     <Box
       component="section"
@@ -16,42 +25,45 @@ export default function Home() {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
+        mt: 9,
       }}
     >
-      <Card
-        sx={{
-          maxWidth: 1000,
-          bgcolor: "primary.main",
-          color: "primary.contrastText",
-          mt: 4,
-          mb: 4,
-        }}
-      >
-        <CardActionArea component={Link} href="/cv">
-          <CardMedia
-            component="img"
-            height="500"
-            image="/images/portada.jpg"
-            alt="Portada"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              FRONTEND DEVELOPER
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ color: "text.contrastText", textAlign: "justify" }}
-            >
-              Ingeniero en Sistemas con 4 años de experiencia desarrollando
-              soluciones web robustas con Laravel, React y Lit Element. Experto
-              en bases de datos SQL, despliegue tanto en Digital Ocean como en
-              servidores Dabian y soporte técnico integral. Certificado por
-              Microsoft en CRM Dynamics 365. Alta capacidad de adaptación,
-              trabajo en equipo y resolución de problemas.
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+      <Slide in={show} direction="down" timeout={1500}>
+        <Card
+          sx={{
+            maxWidth: 1000,
+            bgcolor: "primary.main",
+            color: "primary.contrastText",
+            mt: 2,
+            mb: 4,
+          }}
+        >
+          <CardActionArea component={Link} href="/cv">
+            <CardMedia
+              component="img"
+              height="500"
+              image="/images/portada.jpg"
+              alt="Portada"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                FRONTEND DEVELOPER
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.contrastText", textAlign: "justify" }}
+              >
+                Ingeniero en Sistemas con 4 años de experiencia desarrollando
+                soluciones web robustas con Laravel, React y Lit Element.
+                Experto en bases de datos SQL, despliegue tanto en Digital Ocean
+                como en servidores Dabian y soporte técnico integral.
+                Certificado por Microsoft en CRM Dynamics 365. Alta capacidad de
+                adaptación, trabajo en equipo y resolución de problemas.
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Slide>
     </Box>
   );
 }

@@ -18,7 +18,8 @@ import Link from "next/link";
 
 const pages = [
   { label: "Curriculum", href: "/cv" },
-  { label: "Proyectos", href: "#" },
+  { label: "Proyectos", href: "/proyects" },
+  { label: "Hobbies", href: "/hobbies" },
 ];
 
 function ResponsiveAppBar() {
@@ -35,7 +36,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <WorkIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -95,7 +96,9 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <WorkIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Link href="/">
+            <WorkIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          </Link>
           <Typography
             variant="h5"
             noWrap
