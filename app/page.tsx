@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Box from "@mui/material/Box";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,7 +27,7 @@ export default function Home() {
           mb: 4,
         }}
       >
-        <CardActionArea>
+        <CardActionArea component={Link} href="/cv">
           <CardMedia
             component="img"
             height="500"

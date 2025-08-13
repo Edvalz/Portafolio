@@ -10,6 +10,12 @@ const game = createTheme({
       dark: "#5A617A",
       contrastText: "#fff",
     },
+    secondary: {
+      main: "#4C8C64",
+      light: "#76B28A",
+      dark: "#326146",
+      contrastText: "#fff",
+    },
   },
   typography: {
     fontFamily: [
