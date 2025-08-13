@@ -25,6 +25,7 @@ export default function Home() {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
+        mt: 9,
       }}
     >
       <Slide in={show} direction="down" timeout={1500}>

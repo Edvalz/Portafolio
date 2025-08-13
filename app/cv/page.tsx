@@ -53,6 +53,7 @@ export default function CV() {
         justifyContent: "center",
         minHeight: "100vh",
         p: 2,
+        mt: 9,
       }}
     >
       <Paper
