@@ -16,7 +16,7 @@ export default function SoftItem({ skills }: SoftItemProps) {
       sx={{ mt: 2, flexWrap: "wrap", gap: 2 }}
     >
       {skills.map((skill, index) => (
-        <Chip label={skill} sx={{ bgcolor: "primary.main" }} />
+        <Chip key={index} label={skill} sx={{ bgcolor: "primary.main" }} />
       ))}
     </Stack>
   );
