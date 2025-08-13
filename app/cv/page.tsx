@@ -62,10 +62,10 @@ export default function CV() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "75%",
-          maxWidth: "1000px",
+          width: "95%",
+          //*maxWidth: "1000px",*/
           p: 4,
-          mt: 4,
+          mt: 2,
           mb: 4,
           "@media print": {
             width: "100%",

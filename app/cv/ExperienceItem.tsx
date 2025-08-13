@@ -49,7 +49,7 @@ export default function ExperienceItem({
           alignItems="center"
           sx={{ width: "100%" }}
         >
-          <Typography variant="body1" sx={{ textAlign: "left", width: "30%" }}>
+          <Typography variant="body1" sx={{ textAlign: "left", width: "45%" }}>
             {icon}
             {title}
           </Typography>
