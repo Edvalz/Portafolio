@@ -57,6 +57,7 @@ export default function CV() {
       sx={{
         display: "flex",
         justifyContent: "center",
+        justifyItems: "center",
         minHeight: "100vh",
         p: 2,
         mt: 9,
@@ -70,7 +71,7 @@ export default function CV() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "95%",
+            width: "100%",
             p: 4,
             mt: 2,
             mb: 4,
