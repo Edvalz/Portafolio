@@ -52,7 +52,7 @@ export default function Home() {
               sx={{ display: "flex", alignItems: "center" }}
             >
               <Avatar
-                alt="Remy Sharp"
+                alt="Eduardo Vallejo"
                 src="/images/foto.webp"
                 sx={{
                   width: { xs: 150, sm: 200, md: 250 },
