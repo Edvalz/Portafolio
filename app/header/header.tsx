@@ -18,7 +18,6 @@ import Link from "next/link";
 
 const pages = [
   { label: "Curriculum", href: "/cv" },
-  { label: "Proyectos", href: "/proyects" },
   { label: "Hobbies", href: "/hobbies" },
 ];
 
