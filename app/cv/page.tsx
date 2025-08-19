@@ -139,7 +139,6 @@ export default function CV() {
             <ContactItem
               icon={<PhoneAndroidIcon color="primary" />}
               text="55-64-34-54-79"
-              tool=""
             />
             <ContactItem
               icon={<LinkedInIcon color="primary" />}

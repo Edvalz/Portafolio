@@ -6,7 +6,7 @@ interface ContactItemProps {
   icon: React.ReactNode;
   text: string;
   href?: string;
-  tool: string;
+  tool?: string;
 }
 
 export default function ContactItem({
