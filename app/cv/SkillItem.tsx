@@ -20,7 +20,14 @@ export default function SkillItem({ skills }: CertificationsItemProps) {
   return (
     <List sx={{ alignSelf: "flex-start", textAlign: "left" }}>
       {skills.map((skill, index) => (
-        <ListItem key={index}>
+        <ListItem
+          key={index}
+          sx={{
+            "@media print": {
+              pageBreakInside: "avoid",
+            },
+          }}
+        >
           <ListItemAvatar>
             <Avatar sx={{ bgcolor: "primary.main" }}>{skill.icon}</Avatar>
           </ListItemAvatar>
