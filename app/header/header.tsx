@@ -128,7 +128,7 @@ function ResponsiveAppBar() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Avatar">
-              <Avatar alt="Eduardo Vallejo" src="/images/foto.webp" />
+              <Avatar alt="Eduardo Vallejo" src="/images/Foto.webp" />
             </Tooltip>
           </Box>
         </Toolbar>

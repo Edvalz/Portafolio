@@ -53,7 +53,7 @@ export default function Home() {
             >
               <Avatar
                 alt="Eduardo Vallejo"
-                src="/images/foto.webp"
+                src="/images/Foto.webp"
                 sx={{
                   width: { xs: 150, sm: 200, md: 250 },
                   height: { xs: 150, sm: 200, md: 250 },
