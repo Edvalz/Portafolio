@@ -30,7 +30,14 @@ export default function ExperienceItem({
   tasks,
 }: ExperienceItemProps) {
   return (
-    <Accordion sx={{ width: "100%" }}>
+    <Accordion
+      sx={{
+        width: "100%",
+        "@media print": {
+          pageBreakInside: "avoid",
+        },
+      }}
+    >
       <AccordionSummary
         expandIcon={<ArrowDropDownIcon />}
         aria-controls="panel1-content"
