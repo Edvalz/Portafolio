@@ -14,7 +14,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import WorkIcon from "@mui/icons-material/Work";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const pages = [
   { label: "Curriculum", href: "/cv" },
@@ -23,7 +26,7 @@ const pages = [
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
+    null,
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,6 +35,15 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const { t, i18n } = useTranslation();
+
+  const isEnglish = !!i18n.language && i18n.language.startsWith("en");
+
+  const handleLanguageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newLang = event.target.checked ? "en" : "es";
+    i18n.changeLanguage(newLang);
   };
 
   return (
@@ -54,7 +66,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Portafolio
+            {t("header.Title")}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -126,6 +138,18 @@ function ResponsiveAppBar() {
               </Link>
             ))}
           </Box>
+          <FormControlLabel
+            control={
+              <Switch
+                color="default"
+                checked={!!isEnglish}
+                onChange={handleLanguageChange}
+                sx={{ mr: 2 }}
+              />
+            }
+            label="Language"
+            labelPlacement="top"
+          />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Avatar">
               <Avatar alt="Eduardo Vallejo" src="/images/Foto.webp" />

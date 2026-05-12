@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from '@mui/material/styles';
-import game from './theme/theme'; 
+import { ThemeProvider } from "@mui/material/styles";
+import game from "./theme/theme";
 import Header from "./header/header";
-
+import I18nProvider from "./translations/I18nProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +28,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <I18nProvider>
           <ThemeProvider theme={game}>
-            <Header/>
+            <Header />
             {children}
           </ThemeProvider>
-        </body>
+        </I18nProvider>
+      </body>
     </html>
   );
 }

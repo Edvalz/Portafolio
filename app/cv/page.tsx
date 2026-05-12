@@ -35,6 +35,7 @@ import {
   Download as DownloadIcon,
   Terminal as TerminalIcon,
 } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 const email = "eduardo_valllejo@outlook.es";
 
@@ -46,6 +47,8 @@ export default function CV() {
     contentRef: componentRef,
     documentTitle: "CV_Jose_Eduardo_Vallejo_Cruz",
   });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setCollapse(true);
@@ -84,7 +87,7 @@ export default function CV() {
             },
           }}
         >
-          <Tooltip title="Descargar PDF">
+          <Tooltip title={t("cv.tool.Download")}>
             <Fab
               color="secondary"
               onClick={handlePrint}
@@ -118,10 +121,8 @@ export default function CV() {
             justifyContent="center"
             alignItems="center"
           >
-            <Typography variant="body1">Desarrollador Full Stack</Typography>
-            <Typography variant="body1">
-              Especialista en Laravel, React y Web Components
-            </Typography>
+            <Typography variant="body1">{t("cv.Title")}</Typography>
+            <Typography variant="body1">{t("cv.Subt")}</Typography>
           </Stack>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -134,7 +135,7 @@ export default function CV() {
               icon={<EmailIcon color="primary" />}
               text={email}
               href={`mailto:${email}`}
-              tool="Enviar Correo"
+              tool={t("cv.tool.Email")}
             />
             <ContactItem
               icon={<PhoneAndroidIcon color="primary" />}
@@ -144,7 +145,7 @@ export default function CV() {
               icon={<LinkedInIcon color="primary" />}
               text="Perfil de LinkedIn"
               href="https://www.linkedin.com/in/jose-eduardo-vallejo-cruz-7360541b6/"
-              tool="Ir al perfil"
+              tool={t("cv.tool.Lkdn")}
             />
           </Stack>
           <Divider
@@ -161,7 +162,7 @@ export default function CV() {
               fontSize="large"
               color="secondary"
             />
-            Perfil profesional
+            {t("cv.Profile")}
           </Typography>
           <Typography
             gutterBottom
@@ -169,12 +170,7 @@ export default function CV() {
             variant="body2"
             sx={{ alignSelf: "flex-start", textAlign: "left" }}
           >
-            Ingeniero en Sistemas con 4 años de experiencia desarrollando
-            soluciones web robustas con Laravel, React y Lit Element. Experto en
-            bases de datos SQL, despliegue tanto en Digital Ocean como en
-            servidores Dabian y soporte técnico integral. Certificado por
-            Microsoft en CRM Dynamics 365. Alta capacidad de adaptación, trabajo
-            en equipo y resolución de problemas.
+            {t("cv.Resume")}
           </Typography>
           <Divider
             sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
@@ -189,7 +185,7 @@ export default function CV() {
               fontSize="large"
               color="secondary"
             />
-            Experiencia Laboral
+            {t("cv.ExpT")}
           </Typography>
           <ExperienceItem
             icon={
@@ -259,7 +255,7 @@ export default function CV() {
               fontSize="large"
               color="secondary"
             />
-            Educación
+            {t("cv.EduT")}
           </Typography>
           <Typography
             gutterBottom
