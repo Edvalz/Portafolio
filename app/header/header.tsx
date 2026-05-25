@@ -14,10 +14,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import WorkIcon from "@mui/icons-material/Work";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch, {SwitchProps} from "@mui/material/Switch";
+import TranslateIcon from '@mui/icons-material/Translate';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+
+
 
 const pages = [
   { label: "Curriculum", href: "/cv" },
@@ -138,18 +141,14 @@ function ResponsiveAppBar() {
               </Link>
             ))}
           </Box>
-          <FormControlLabel
-            control={
-              <Switch
+            <FormControlLabel
+              control={<Switch
                 color="default"
                 checked={!!isEnglish}
                 onChange={handleLanguageChange}
-                sx={{ mr: 2 }}
-              />
-            }
-            label="Language"
-            labelPlacement="top"
-          />
+                sx={{ mr: 2,}}
+              />}
+            label={<TranslateIcon/>} labelPlacement="start"/>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Avatar">
               <Avatar alt="Eduardo Vallejo" src="/images/Foto.webp" />

@@ -39,6 +39,17 @@ import { useTranslation } from "react-i18next";
 
 const email = "eduardo_valllejo@outlook.es";
 
+interface ExperienceItemProps {
+  title: string;
+  date_range: string;
+  tasks: string[];
+}
+
+interface SkillItemProps {
+  title: string;
+  text: string;
+}
+
 export default function CV() {
   const componentRef = useRef<HTMLDivElement>(null);
   const [collapse, setCollapse] = useState<boolean>(false);
@@ -49,6 +60,22 @@ export default function CV() {
   });
 
   const { t } = useTranslation();
+
+  const jobsList = t("cv.jobs", {
+    returnObjects: true,
+  }) as ExperienceItemProps[];
+
+  const skillsList = t("cv.HSkills", {
+    returnObjects: true,
+  }) as SkillItemProps[];
+
+  const certificationsList = t("cv.certifications", {
+    returnObjects: true,
+  }) as string[];
+
+  const sskillsList = t("cv.SSkills", {
+    returnObjects: true,
+  }) as string[];
 
   useEffect(() => {
     setCollapse(true);
@@ -187,55 +214,20 @@ export default function CV() {
             />
             {t("cv.ExpT")}
           </Typography>
-          <ExperienceItem
-            icon={
-              <HomeWorkIcon
-                color="primary"
-                sx={{ verticalAlign: "middle", mr: 1 }}
-              />
-            }
-            title="Sunrise Computer Services"
-            date_range="Febrero 2020 - Mayo 2023"
-            tasks={[
-              "Desarrollo de un CRM interno con PHP y MySQL.",
-              "Mantenimiento de páginas web y soporte técnico en sitio y remoto.",
-              "Diseño y administración de bases de datos.",
-            ]}
-          />
-          <ExperienceItem
-            icon={
-              <HomeWorkIcon
-                color="primary"
-                sx={{ verticalAlign: "middle", mr: 1 }}
-              />
-            }
-            title="Indra Sistemas México"
-            date_range="Mayo 2023 - Septiembre 2024"
-            tasks={[
-              "Desarrollo de componentes Web con React, Lit Element y Polymer.",
-              "Desarrollo de PCFs para Dynamics 365 usando React, C#, JS y Power Automate.",
-              "Capacitación en CRM Dynamics 365.",
-              "Uso de Git y Git Hub.",
-              "Metodología SCRUM.",
-            ]}
-          />
-          <ExperienceItem
-            icon={
-              <HomeWorkIcon
-                color="primary"
-                sx={{ verticalAlign: "middle", mr: 1 }}
-              />
-            }
-            title="Sunrise Computer Services"
-            date_range="Septiembre 2024 - Agosto 2025"
-            tasks={[
-              "Desarrollo de sistemas administrativos con Laravel, Blade y PostgreSQL.",
-              "Despliegue en DigitalOcean y soporte técnico vía tickets.",
-              "Uso de Git y Git Hub.",
-              "Despliegue en Debian y administración de multiples aplicaciones.",
-              "Implementación de Github Actions para CI y CD.",
-            ]}
-          />
+          {jobsList.map((job, index) => (
+            <ExperienceItem
+              icon={
+                <HomeWorkIcon
+                  color="primary"
+                  sx={{ verticalAlign: "middle", mr: 1 }}
+                />
+              }
+              key={index}
+              title={job.title}
+              date_range={job.date_range}
+              tasks={job.tasks}
+            />
+          ))}
           <Divider
             sx={{
               width: "100%",
@@ -263,8 +255,7 @@ export default function CV() {
             variant="body2"
             sx={{ alignSelf: "flex-start", textAlign: "left" }}
           >
-            Ingeniería en Sistemas y Comunicaciones – Universidad Autónoma del
-            Estado de México (2018 – 2023).
+            {t("cv.school")}
           </Typography>
           <Typography
             gutterBottom
@@ -272,7 +263,7 @@ export default function CV() {
             variant="body2"
             sx={{ alignSelf: "flex-start", textAlign: "left" }}
           >
-            Cédula Profesional: <b>14202047</b>
+            {t("cv.ProfT")} <b>{t("cv.ProfID")}</b>
           </Typography>
           <Divider
             sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
@@ -288,15 +279,9 @@ export default function CV() {
               fontSize="large"
               color="secondary"
             />
-            Certificaciones
+            {t("cv.CerT")}
           </Typography>
-          <CertificationItem
-            certifications={[
-              "Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate",
-              "Microsoft Certified: Power Platform Fundamentals",
-              "Microsoft Certified: Dynamics 365 Fundamentals (CRM)",
-            ]}
-          />
+          <CertificationItem certifications={certificationsList} />
           <Divider
             sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
           />
@@ -311,31 +296,23 @@ export default function CV() {
               fontSize="large"
               color="secondary"
             />
-            Habilidades Técnias
+            {t("cv.HSkillsT")}
           </Typography>
           <SkillItem
-            skills={[
-              {
-                icon: <BrushSharpIcon />,
-                title: "Frontend",
-                text: "HTML5, CSS3, JavaScript (ES6), React, Lit Element, Web Components",
-              },
-              {
-                icon: <SettingsSharpIcon />,
-                title: "Backend",
-                text: "PHP, Laravel, Blade, Node.js, C#",
-              },
-              {
-                icon: <StorageSharpIcon />,
-                title: "Base de Datos",
-                text: "MySQL, PostgreSQL, MariaDB",
-              },
-              {
-                icon: <TerminalIcon />,
-                title: "Otros",
-                text: "Programación Asíncrona, Consumo de APIs, Algoritmos y Estructuras de Datos, Terminal Linux",
-              },
-            ]}
+            skills={skillsList.map((skill, index) => {
+              const icons = [
+                <BrushSharpIcon key="front" />,
+                <SettingsSharpIcon key="back" />,
+                <StorageSharpIcon key="db" />,
+                <TerminalIcon key="other" />,
+              ];
+
+              return {
+                icon: icons[index],
+                title: skill.title,
+                text: skill.text,
+              };
+            })}
           />
           <Divider
             sx={{ width: "100%", my: 2, backgroundColor: "primary.main" }}
@@ -353,16 +330,7 @@ export default function CV() {
             />
             Otras Habilidades
           </Typography>
-          <SoftItem
-            skills={[
-              "Responsabilidad",
-              "Proactividad",
-              "Resolución de Problemas",
-              "Trabajo en Equipo",
-              "Liderazgo",
-              "Gestión de Proyectos",
-            ]}
-          />
+          <SoftItem skills={sskillsList} />
         </Paper>
       </Collapse>
     </Box>
