@@ -2,6 +2,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import SoftItem from "./cv/SoftItem";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   Slide,
@@ -14,6 +15,7 @@ import {
 
 export default function Home() {
   const [show, setShow] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setShow(true);
@@ -76,20 +78,16 @@ export default function Home() {
                 <Grid size={12}>
                   <Stack>
                     <Typography variant="h5" align="center">
-                      ¿Quieres conocerme?
+                      {t("welcome.Title")}
                     </Typography>
                     <Typography variant="body2" align="justify" sx={{ mt: 2 }}>
-                      Mi nombre es Eduardo y tengo el título Ingeniero en
-                      Sistemas especializado en desarrollo web con experiencia
-                      en Laravel, React y arquitectura de software. Apasionado
-                      por crear soluciones eficientes, escalables y fáciles de
-                      usar.
+                      {t("welcome.Resume")}
                     </Typography>
                   </Stack>
                 </Grid>
                 <Grid size={12}>
                   <Typography variant="h5" align="center" sx={{ mb: 2 }}>
-                    Teconologías con las que he trabajado
+                    {t("welcome.Subt")}
                   </Typography>
                   <SoftItem
                     skills={[
